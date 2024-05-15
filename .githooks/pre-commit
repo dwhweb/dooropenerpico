@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Pre-commit script for dooropenerpico
+# By dwhweb 2024-05-14
+
+source $(dirname "$0")/write_config.sh
+
+echo "Pre-commit hook script fired..."
+
+config_file="$(readlink -f "$(dirname "$(readlink -f "$0")")/../lib/dooropenerpico/credentials.conf")"
+echo Checking for configuration file at $config_file...
+
+if [ -f $config_file ]; then
+  if [ "$(md5sum "$config_file" | awk '{print $1}')" == "96692269d630d44164fad8c1c899f1e7" ]; then
+    echo "$config_file is unmodified (empty), committing..."
+    exit 0
+  else
+    while true; do
+      exec < /dev/tty # Needed to allow console input
+      read -p "$config_file is modified, do you want to populate with empty credentials before aborting? (Yes/No)" yn
+	    case $yn in
+        [Yy]* ) 
+          write_config "$config_file" "" "" "" 1883 "" "";  break;;
+        [Nn]* ) break;;
+        * ) echo -e "Please answer yes or no.";;
+	    esac
+    done
+    echo "$config_file was modified (had credentials), commit aborted. If you populated the file with empty credentials, you should add it and do another commit."
+    exit 1
+  fi
+else
+  echo "$config_file not found, creating a file with empty credentials..."
+  write_config "$config_file" "" "" "" 1883 "" ""
+  echo "Commit aborted, you should add the newly created credentials file and do another commit."
+  exit 1
+fi

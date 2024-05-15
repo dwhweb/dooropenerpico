@@ -1,0 +1,2 @@
+furo==2024.5.6
+sphinxcontrib-youtube==1.4.1

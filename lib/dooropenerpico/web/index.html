@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Door opener pico admin page</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script src="index.js" defer></script>
+</head>
+<body>
+    <p>Door is <span id="door-state">state</span></p>
+    <p>Switch is <span id="switch-state">state</span></p>
+    <p>Left reed is <span id="left-reed-state">state</span></p>
+    <p>Right reed is <span id="right-reed-state">state</span></p>
+    <p>Relay is <span id="relay-state">state</span></p>
+    <p>Red LED is <span id="red-led-state">state</span></p>
+    <p>Green LED is <span id="green-led-state">state</span></p>
+    <p id="time-info">The door took <span id="time-state"></span> seconds to actuate.</p>
+    <p id="time-error"></p>
+    <button type="button" title="Servo left" id="left-button">&larr;</button>
+    <button type="button" title="Servo right" id="right-button">&rarr;</button>
+    <button type="button" title="Stop" id="stop-button">🛑 Stop</button>
+    <br>
+    <button type="button" title="Force open" id="force-open-button">Force open</button>
+    <button type="button" title="Force closed" id="force-closed-button">Force closed</button>
+    <button type="button" title="Time open/close" id="time-button">Time open/close</button>
+    <br>
+    <button type="button" title="Relay" id="relay-button">Relay</button>
+    <button type="button" title="Red LED" id="red-led-button">Red LED</button>
+    <button type="button" title="Green LED" id="green-led-button">Green LED</button>
+    <br>
+    <button type="button" title="Refresh" id="refresh-button">&#128472; Refresh</button>
+</body>
+</html>
